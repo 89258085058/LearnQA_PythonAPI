@@ -15,5 +15,28 @@ class UserAgent:
 
         url = "https://playground.learnqa.ru/ajax/api/user_agent_check"
         data = {"User-Agent": header}
-        response = requests.get(url, headers=data)
-        print(response.text)
+        response = requests.get(url, headers= data)
+        assert response.status_code == 200, "Wrong response code"
+
+        response_dict = response.json()
+        assert 'platform' in response_dict, "There is not filed 'platform' in the response"
+        assert 'browser' in response_dict, "There is not filed 'browser' in the response"
+        assert 'device' in response_dict, "There is not filed 'device' in the response"
+
+        if len(header) == 0:
+            expected_response_text = "platform, someone"
+            expected_response_text1 = "browser, someone"
+            expected_response_text2 = "device, someone"
+        else:
+            expected_response_text = f"platform, {header}"
+            expected_response_text1 = f"browser, {header}"
+            expected_response_text2 = f"device, {header}"
+
+
+        actual_response_text = response_dict['platform']
+        actual_response_text1 = response_dict['browser']
+        actual_response_text2 = response_dict['device']
+
+        assert actual_response_text == expected_response_text, "Actual text in the response 'platform' is not correct"
+        assert actual_response_text1 == expected_response_text1, "Actual text in the response 'browser' is not correct"
+        assert actual_response_text2 == expected_response_text2, "Actual text in the response 'device' is not correct"
