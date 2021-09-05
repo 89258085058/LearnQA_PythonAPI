@@ -8,6 +8,7 @@ import time
 @allure.epic("Delete test suite")
 class TestUserDelete(BaseCase):
 
+    @allure.severity(allure.severity_level.NORMAL)
     @allure.description("This test attempt to delete a user by ID 2")
     def test_delete_user_id_2(self):
         data = {
@@ -34,7 +35,7 @@ class TestUserDelete(BaseCase):
         expected_fields = ["username", "firstName", "lastName", "email"]
         Assertions.assert_json_has_keys(response3, expected_fields)
 
-
+    @allure.severity(allure.severity_level.NORMAL)
     @allure.description("Create a user, log in from under him, delete, then try to get his data by ID and make sure that the user is really deleted")
     def test_delete_created_user_get_his_data(self):
         # REGISTRATION
@@ -71,7 +72,7 @@ class TestUserDelete(BaseCase):
         Assertions.assert_code_status(response4, 404)
         assert response4.text == "User not found", f"Unexpected response for getting deleted user"
 
-
+    @allure.severity(allure.severity_level.TRIVIAL)
     @allure.description("This test try to delete a user while being authorized by another user")
     def test_delete_being_authorized_by_another_user(self):
         # REGISTRATION USER 1

@@ -8,6 +8,7 @@ import time
 @allure.epic("Edit test suite")
 class TestEdit(BaseCase):
 
+    @allure.title("This test created user")
     @allure.description("This test successfully - user after creation")
     def test_edit_just_created_user(self):
         # REGISTER
@@ -46,7 +47,7 @@ class TestEdit(BaseCase):
         Assertions.assert_json_value_by_name(response4, "firstName", new_name, "Wrong name of the user after edit")
 
 
-
+    @allure.title("This test edit user not authorized")
     @allure.description("This test doesn't change the user's data, being unauthorized")
     def test_edit_user_not_authorized(self):
         # REGISTER
@@ -83,7 +84,7 @@ class TestEdit(BaseCase):
         Assertions.assert_json_value_by_name(response4, "firstName", first_name,
                                              "Wrong name of the user after edit without authorization")
 
-
+    @allure.title("This test different use")
     @allure.description("This test change the user's data, being authorized by another user")
     def test_edit_different_user(self):
         # REGISTRATION 1
@@ -142,7 +143,7 @@ class TestEdit(BaseCase):
         Assertions.assert_json_value_by_name(response6, "firstName", first_name_1,
                                              "Wrong name of the user 1 after edit with different user")
 
-
+    @allure.severity(allure.severity_level.NORMAL)
     @allure.description("This test try to change the user's email, being authorized by the same user, to a new email without the symbol @")
     def test_edit_email_to_invalid_email(self):
         # REGISTRATION
@@ -181,7 +182,7 @@ class TestEdit(BaseCase):
 
         Assertions.assert_json_value_by_name(response4, "email", email, "Wrong email of the user after edit")
 
-
+    @allure.severity(allure.severity_level.NORMAL)
     @allure.description("This test  try to change the user's firstName, being authorized by the same user, to a very short value of one character")
     def test_edit_user_name_to_invalid_name(self):
         # REGISTER

@@ -5,8 +5,11 @@ from lib.assertions import Assertions
 import time
 
 
+
 @allure.epic("Get user info cases")
 class TestUserGet(BaseCase):
+
+    @allure.feature('user details not auth')
     @allure.description("This test get user info without authorization (only username)")
     def test_get_user_details_not_auth(self):
         response = MyRequests.get("/user/2")
@@ -16,6 +19,7 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_not_key(response, "lastName")
         Assertions.assert_json_has_not_key(response, "email")
 
+    @allure.feature('details auth as same user')
     @allure.description("This test get user info with authorization (all fields)")
     def test_get_user_details_auth_as_same_user(self):
         data = {
@@ -36,6 +40,7 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_keys(response2, expected_fields)
 
 
+    @allure.feature('details auth as different user')
     @allure.description("This test get user info with authorization as different user (only username)")
     def test_get_user_details_auth_as_different_user(self):
         # USER 1
