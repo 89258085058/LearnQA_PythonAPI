@@ -5,6 +5,7 @@ import allure
 import time
 
 
+
 @allure.epic("Delete test suite")
 class TestUserDelete(BaseCase):
 

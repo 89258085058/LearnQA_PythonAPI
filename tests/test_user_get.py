@@ -40,6 +40,7 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_keys(response2, expected_fields)
 
 
+
     @allure.feature('details auth as different user')
     @allure.description("This test get user info with authorization as different user (only username)")
     def test_get_user_details_auth_as_different_user(self):

@@ -46,6 +46,7 @@ class TestUserRegister(BaseCase):
             f"Unexpected response content {response.content}"
 
 
+
     @allure.description("This test doesn't register user missed param")
     @pytest.mark.parametrize('param', params)
     def test_create_user_without_param(self, param):
