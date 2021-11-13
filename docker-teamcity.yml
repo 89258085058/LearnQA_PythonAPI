@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  server:
+    image: localhost:5000/python_server
+    container_name: server_works
+
+  test_runner:
+    build: .
+    image: localhost:5000/python_tests_run
+    container_name: python_tests_works
+    depends_on:
+      - server
+    environment:
+      - PYTEST_DOMAIN=http://server
+    volumes:
+      - .:/tests/
